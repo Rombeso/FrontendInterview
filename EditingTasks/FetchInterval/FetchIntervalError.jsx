@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 export default function App() {
+    let data
     const interval = setInterval(() => {
-        const data = fetchData(); // Assume this function fetches data from an API
+        data = fetchData(); // Assume this function fetches data from an API
     }, 1000);
 
     return (
