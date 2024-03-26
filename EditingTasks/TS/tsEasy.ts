@@ -1,3 +1,18 @@
+// Объект, представляющий информацию о пользователе
+type UserItem = {
+    id: number;
+    userName: string;
+};
+
+// Объект, представляющий информацию о заказе
+type Order = {
+    orderId: number;
+    amount: number;
+};
+
+// Пересечение типов User и Order
+type UserOrder = UserItem & Order;
+
 const user = {
     id: 2,
     userName: 'Jhon'
@@ -12,10 +27,13 @@ const order = {
 const userOrder = { ...user, ...order };
 
 // Функция, которая принимает объект User и возвращает строку
-function greetUser(userOrder): string {
-    return `Hello, ${userOrder.username}, your order is ${userOrder.orderId}!`;
+function greetUser(userOrder: UserOrder): string {
+    return `Hello, ${userOrder.userName}, your order is ${userOrder.orderId}!`;
 }
 
+greetUser(userOrder)
+
+// --------------- Generics
 
 function reverseArray<T>(array: T[]): T[] {
     return array.reverse();
@@ -25,6 +43,7 @@ const fruits = ["apple", "banana", "orange"]
 const reversedNumbers = reverseArray<number>(numbers);
 const reversedStrings = reverseArray<string>(fruits);
 
+// -------------- Enum
 enum OrderStatus {
     Pending = "pending",
     Processing = "processing",
@@ -50,6 +69,8 @@ const orderItem: OrderItem = {
 // Вывод информации о заказе
 printOrderInfo(orderItem);
 
+// --------------- Promise
+
 interface User {
     id: number;
     username: string;
@@ -70,6 +91,7 @@ async function fetchUserById(id: number): Promise<User> {
     });
 }
 
+// ----- callbackType
 // Типизация для колбэка, принимающего строку и возвращающего число
 type CallbackFunction = (str: string) => number;
 
