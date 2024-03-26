@@ -108,3 +108,37 @@ function stringLength(str: string): number {
 
 // Вызов функции processString с колбэком stringLength
 processString("Hello, world!", stringLength);
+
+// Все вместе
+
+interface User {
+    id: number;
+    username: string;
+}
+
+async function fetchUserById(id: number): Promise<User> {
+    // Здесь обычно происходит асинхронный запрос к серверу или базе данных
+    return new Promise<User>((resolve, reject) => {
+        // Имитируем задержку запроса в 1 секунду
+        setTimeout(() => {
+            const user: User = {
+                id,
+                username: `user${id}`
+            };
+            resolve(user);
+        }, 1000);
+    });
+}
+
+async function printUsername(fetchFunction: (id: number) => Promise<User>, id: number): Promise<void> {
+    try {
+        const user = await fetchFunction(id);
+        console.log(user.username);
+    } catch (error) {
+        console.error('Error fetching user:', error);
+    }
+}
+
+// Пример использования
+const userId = 123;
+printUsername(fetchUserById, userId);
